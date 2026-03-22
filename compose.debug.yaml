@@ -1,0 +1,10 @@
+services:
+  foodorderingapp:
+    image: foodorderingapp
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    command: ["sh", "-c", "pip install debugpy -t /tmp && python /tmp/debugpy --wait-for-client --listen 0.0.0.0:5678 -m {   "name": "Django + React Dev",   "dockerComposeFile": "docker-compose.yml",   // or use "build": { "dockerfile": "Dockerfile" }   "service": "backend",                        // if using compose   "workspaceFolder": "/app",   "remoteUser": "vscode",                      // or your non-root user   "features": {     "ghcr.io/devcontainers/features/python:1": {},     "ghcr.io/devcontainers/features/node:1": {}   // for React / frontend tools   },   "postCreateCommand": "pip install -r requirements.txt && npm install"  // or similar } runserver 0.0.0.0:8000 --nothreading --noreload"]
+    ports:
+      - 8000:8000
+      - 5678:5678
